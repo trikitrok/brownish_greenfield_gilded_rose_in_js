@@ -5,7 +5,7 @@ var GildedRose = require('../src/gildedRose.js'),
   Item = GildedRose.Item;
 
 describe("GildedRose inventory at the end of each day", function() {
-  it("the quality of a product decreases by 1", function() {
+  it("the quality of a regular item decreases by 1", function() {
     var daysToBeSold = 5, quality = 10,
       item = new Item("A regular item", daysToBeSold, quality),
       inventory = Inventory([item]);
@@ -15,7 +15,7 @@ describe("GildedRose inventory at the end of each day", function() {
     expect(item.quality).toBe(quality - 1);
   });
 
-  it("the days to be sold of a product decrease by 1", function() {
+  it("the days to be sold of any item decrease by 1", function() {
     var daysToBeSold = 4, notNeededQuality = null,
       item = new Item("A regular item", daysToBeSold, notNeededQuality),
       inventory = Inventory([item]);
@@ -124,5 +124,15 @@ describe("GildedRose inventory at the end of each day", function() {
     inventory.update();
 
     expect(item.quality).toBe(quality);
+  });
+
+  it("the quality of a conjured regular item decreases by 2", function() {
+    var daysToBeSold = 5, quality = 10,
+      item = new Item("A conjured regular item", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality - 2);
   });
 });

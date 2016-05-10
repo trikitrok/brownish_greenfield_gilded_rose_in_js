@@ -3,14 +3,27 @@ module.exports = {
 };
 
 function create(item) {
-  if(item.name === "Aged Brie") {
-    return AgedBrie(item);
-  } else if(item.name === "Sulfuras") {
-    return Sulfuras();
-  } else if(item.name === "Backstage passes") {
-    return BackstagePasses(item);
+  var name = item.name.slice(0);;
+
+  if(name.toLowerCase().indexOf("conjured") != -1) {
+    var notconjuredItemName = item.name.replace("Conjured", "").replace("conjured", "").replace(/  +/g, ' ');
+    return Conjured(createItemAccordingToName(notconjuredItemName, item));
+  } 
+    
+  return createItemAccordingToName(name, item);
+  
+
+
+  function createItemAccordingToName(name, item) {
+    if(name === "Aged Brie") {
+      return AgedBrie(item);
+    } else if(name === "Sulfuras") {
+      return Sulfuras();
+    } else if(name === "Backstage passes") {
+      return BackstagePasses(item);
+    }
+    return RegularItem(item);
   }
-  return RegularItem(item);
 }
 
 function DegradableItem(item) {
@@ -30,7 +43,7 @@ function DegradableItem(item) {
 
 function RegularItem(item) {
   return {
-    update: function update() {
+    update: function() {
       DegradableItem(item).age();
       updateQuality();
     }
@@ -66,7 +79,7 @@ function Sulfuras() {
 
 function BackstagePasses(item) {
   return {
-    update: function update() {
+    update: function() {
       DegradableItem(item).age();
       updateQuality();
     }
@@ -84,4 +97,13 @@ function BackstagePasses(item) {
       item.quality = 0;
     }
   }
+}
+
+function Conjured(item) {
+  return {
+    update: function () {
+      item.update();
+      item.update();
+    }
+  };
 }

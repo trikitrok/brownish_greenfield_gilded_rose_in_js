@@ -13,18 +13,24 @@ function create(item) {
   return RegularItem(item);
 }
 
+function DegradableItem(item) {
+  return {
+    age: age,
+  };
+
+  function age() {
+     item.sell_in -= 1;
+  }
+}
+
 function RegularItem(item) {
   return {
     update: update
   };
 
   function update() {
-    age();
+    DegradableItem(item).age();
     updateQuality();
-  }
-
-  function age() {
-     item.sell_in -= 1;
   }
 
   function updateQuality() {
@@ -46,12 +52,8 @@ function AgedBrie(item) {
   };
 
   function update() {
-    age();
+    DegradableItem(item).age();
     updateQuality();
-  }
-
-  function age() {
-     item.sell_in -= 1;
   }
 
   function updateQuality() {
@@ -71,12 +73,8 @@ function BackstagePasses(item) {
   };
 
   function update() {
-    age();
+   DegradableItem(item).age();
     updateQuality();
-  }
-
-  function age() {
-     item.sell_in -= 1;
   }
 
   function updateQuality() {

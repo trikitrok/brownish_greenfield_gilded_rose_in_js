@@ -34,17 +34,13 @@ function create(item) {
 
 function DegradableItem(item) {
   return {
-    age: age,
-    increaseQualityBy: increaseQualityBy
+    age: function() {
+       item.sell_in -= 1;
+    },
+    increaseQualityBy: function(amount) {
+      item.quality = Math.min(50, item.quality + amount);
+    }
   };
-
-  function age() {
-     item.sell_in -= 1;
-  }
-
-  function increaseQualityBy(amount) {
-    item.quality = Math.min(50, item.quality + amount);
-  }
 }
 
 function RegularItem(item) {

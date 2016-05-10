@@ -4,8 +4,9 @@ module.exports = {
 
 function create(item) {
   if(isConjured(item)) {
-    var notconjuredItemName = item.name.replace("Conjured", "").replace("conjured", "").replace(/  +/g, ' ');
-    return Conjured(createItemAccordingToName(notconjuredItemName, item));
+    return Conjured(
+      createItemAccordingToName(notConjuredItemNameFor(item), item)
+    );
   } 
     
   return createItemAccordingToName(item.name, item);
@@ -24,6 +25,10 @@ function create(item) {
   function isConjured(item) {
     var name = item.name.slice(0);
     return name.toLowerCase().indexOf("conjured") != -1;
+  }
+
+  function notConjuredItemNameFor(item) {
+    return item.name.replace("Conjured", "").replace("conjured", "").replace(/  +/g, ' ');
   }
 }
 

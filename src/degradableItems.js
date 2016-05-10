@@ -12,15 +12,13 @@ function createFrom(items) {
 
 function DegradableItems(degradableItems) {
   return {
-    update: update
+    update: function() {
+      degradableItems.forEach(
+        function(item) {
+          item.age();
+          item.updateQuality();
+        }
+      );
+    }
   };
-
-  function update() {
-    degradableItems.forEach(
-      function(item) {
-        item.age();
-        item.updateQuality();
-      }
-    );
-  }
 }

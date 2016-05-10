@@ -9,13 +9,11 @@ module.exports = {
 
 function Inventory(items) {
   return {
-    update: update
+    update: function () {
+      var degradableItems = DegradableItems.createFrom(items);
+      degradableItems.update();
+    }
   };
-
-  function update() {
-    var degradableItems = DegradableItems.createFrom(items);
-    degradableItems.update();
-  }
 }
 
 function Item(name, sell_in, quality) {

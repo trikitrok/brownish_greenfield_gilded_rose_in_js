@@ -3,17 +3,13 @@ module.exports = {
 };
 
 function create(item) {
-  var name = item.name.slice(0);;
-
-  if(name.toLowerCase().indexOf("conjured") != -1) {
+  if(isConjured(item)) {
     var notconjuredItemName = item.name.replace("Conjured", "").replace("conjured", "").replace(/  +/g, ' ');
     return Conjured(createItemAccordingToName(notconjuredItemName, item));
   } 
     
-  return createItemAccordingToName(name, item);
+  return createItemAccordingToName(item.name, item);
   
-
-
   function createItemAccordingToName(name, item) {
     if(name === "Aged Brie") {
       return AgedBrie(item);
@@ -23,6 +19,11 @@ function create(item) {
       return BackstagePasses(item);
     }
     return RegularItem(item);
+  }
+
+  function isConjured(item) {
+    var name = item.name.slice(0);
+    return name.toLowerCase().indexOf("conjured") != -1;
   }
 }
 

@@ -135,4 +135,16 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.quality).toBe(quality - 2);
   });
+
+  it("the days to be sold of a Conjured item decrease by 1", function() {
+    var daysToBeSold = 4, notNeededQuality = null,
+      item = new Item("A conjured regular item", daysToBeSold, notNeededQuality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.sell_in).toBe(daysToBeSold - 1);
+  });
+
+  
 });

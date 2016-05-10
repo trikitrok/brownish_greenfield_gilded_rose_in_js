@@ -18,7 +18,8 @@ function DegradableItems(degradableItems) {
   function update() {
     degradableItems.forEach(
       function(item) {
-        item.update();
+        item.age();
+        item.updateQuality();
       }
     );
   }

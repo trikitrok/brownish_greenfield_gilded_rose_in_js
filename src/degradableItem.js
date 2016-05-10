@@ -49,19 +49,15 @@ function DegradableItem(item) {
 
 function RegularItem(item) {
   return {
-    update: function() {
-      DegradableItem(item).age();
-      updateQuality();
+    age: DegradableItem(item).age,
+    updateQuality: function() {
+      if(item.sell_in >= 0) {
+        decreaseQualityBy(1);  
+      } else {
+        decreaseQualityBy(2);  
+      }
     }
   };
-
-  function updateQuality() {
-    if(item.sell_in >= 0) {
-      decreaseQualityBy(1);  
-    } else {
-      decreaseQualityBy(2);  
-    }
-  }
 
   function decreaseQualityBy(value) {
     item.quality = Math.max(0, item.quality - value)
@@ -70,8 +66,8 @@ function RegularItem(item) {
 
 function AgedBrie(item) {
   return {
-    update: function () {
-      DegradableItem(item).age();
+    age: DegradableItem(item).age,
+    updateQuality: function () {
       DegradableItem(item).increaseQualityBy(1);
     }
   };
@@ -79,14 +75,15 @@ function AgedBrie(item) {
 
 function Sulfuras() {
   return {
-    update: function() {}
+    age: function() {},
+    updateQuality: function() {}
   };
 }
 
 function BackstagePasses(item) {
   return {
-    update: function() {
-      DegradableItem(item).age();
+    age: DegradableItem(item).age,
+    updateQuality: function() {
       updateQuality();
     }
   };
@@ -107,9 +104,10 @@ function BackstagePasses(item) {
 
 function Conjured(item) {
   return {
-    update: function () {
-      item.update();
-      item.update();
+    age: item.age,
+    updateQuality: function () {
+      item.updateQuality();
+      item.updateQuality();
     }
   };
 }

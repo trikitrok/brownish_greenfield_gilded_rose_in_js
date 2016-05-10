@@ -15,16 +15,24 @@ function RegularItem(item) {
   };
 
   function update() {
-    item.sell_in -= 1;
-    if(item.quality <= 0) {
-      return;
-    }
-    
+    age();
+    updateQuality();
+  }
+
+  function age() {
+     item.sell_in -= 1;
+  }
+
+  function updateQuality() {
     if(item.sell_in >= 0) {
-      item.quality -= 1;  
+      decreaseQualityBy(1);  
     } else {
-      item.quality -= 2;  
+      decreaseQualityBy(2);  
     }
+  }
+
+  function decreaseQualityBy(value) {
+    item.quality = Math.max(0, item.quality - value)
   }
 }
 
@@ -34,7 +42,15 @@ function AgedBrie(item) {
   };
 
   function update() {
-    item.sell_in -= 1;
+    age();
+    updateQuality();
+  }
+
+  function age() {
+     item.sell_in -= 1;
+  }
+
+  function updateQuality() {
     item.quality += 1;
   }
 }

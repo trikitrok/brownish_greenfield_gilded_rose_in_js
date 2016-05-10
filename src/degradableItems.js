@@ -3,7 +3,7 @@ module.exports = {
 };
 
 function createFrom(items) {
-  return items.map(createItem);
+  return DegradableItems(items.map(createItem));
 }
 
 function createItem(item) {
@@ -11,6 +11,20 @@ function createItem(item) {
     return AgedBrie(item);
   }
   return RegularItem(item);
+}
+
+function DegradableItems(items) {
+  return {
+    update: update
+  };
+
+  function update() {
+    items.forEach(
+      function(item) {
+        item.update();
+      }
+    );
+  }
 }
 
 function RegularItem(item) {

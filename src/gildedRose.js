@@ -14,11 +14,7 @@ function Inventory(items) {
 
   function update() {
     var degradableItems = DegradableItems.createFrom(items);
-    degradableItems.forEach(updateItem);
-  }
-
-  function updateItem(degradableItem) {
-    degradableItem.update();
+    degradableItems.update();
   }
 }
 

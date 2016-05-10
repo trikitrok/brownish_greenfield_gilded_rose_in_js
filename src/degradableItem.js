@@ -80,8 +80,10 @@ function BackstagePasses(item) {
   function updateQuality() {
     if(item.sell_in > 10) {
       item.quality = item.quality + 1;
-    } else {
+    } else if (10 >= item.sell_in && item.sell_in > 5) {
       item.quality = item.quality + 2;
+    } else {
+      item.quality = item.quality + 3;
     }
   }
 }

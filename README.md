@@ -1,0 +1,1 @@
+[Brownish Greenfield Gilded Rose Kata](http://alvarogarcia7.github.io/blog/2016/04/17/brownish-greenfield-gilded-rose-kata-formulation/) in JavaScript

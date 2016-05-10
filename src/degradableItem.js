@@ -79,23 +79,19 @@ function Sulfuras() {
 function BackstagePasses(item) {
   return {
     age: DegradableItem(item).age,
-    updateQuality: function() {
-      updateQuality();
+    updateQuality: function updateQuality() {
+      var degradableItem = DegradableItem(item);
+      if(item.sell_in > 10) {
+        degradableItem.increaseQualityBy(1);
+      } else if (10 >= item.sell_in && item.sell_in > 5) {
+        degradableItem.increaseQualityBy(2);
+      } else if (5 >= item.sell_in && item.sell_in >= 0) {
+        degradableItem.increaseQualityBy(3);
+      } else {
+        item.quality = 0;
+      }
     }
   };
- 
-  function updateQuality() {
-    var degradableItem = DegradableItem(item);
-    if(item.sell_in > 10) {
-      degradableItem.increaseQualityBy(1);
-    } else if (10 >= item.sell_in && item.sell_in > 5) {
-      degradableItem.increaseQualityBy(2);
-    } else if (5 >= item.sell_in && item.sell_in >= 0) {
-      degradableItem.increaseQualityBy(3);
-    } else {
-      item.quality = 0;
-    }
-  }
 }
 
 function Conjured(item) {

@@ -16,10 +16,15 @@ function create(item) {
 function DegradableItem(item) {
   return {
     age: age,
+    increaseQualityBy: increaseQualityBy
   };
 
   function age() {
      item.sell_in -= 1;
+  }
+
+  function increaseQualityBy(amount) {
+    item.quality = Math.min(50, item.quality + amount);
   }
 }
 
@@ -53,11 +58,7 @@ function AgedBrie(item) {
 
   function update() {
     DegradableItem(item).age();
-    updateQuality();
-  }
-
-  function updateQuality() {
-    item.quality = Math.min(50, item.quality + 1);
+    DegradableItem(item).increaseQualityBy(1);
   }
 }
 
@@ -73,21 +74,20 @@ function BackstagePasses(item) {
   };
 
   function update() {
-   DegradableItem(item).age();
+    DegradableItem(item).age();
     updateQuality();
   }
 
   function updateQuality() {
+    var degradableItem = DegradableItem(item);
     if(item.sell_in > 10) {
-      item.quality = item.quality + 1;
+      degradableItem.increaseQualityBy(1);
     } else if (10 >= item.sell_in && item.sell_in > 5) {
-      item.quality = item.quality + 2;
+      degradableItem.increaseQualityBy(2);
     } else if (5 >= item.sell_in && item.sell_in >= 0) {
-      item.quality = item.quality + 3;
+      degradableItem.increaseQualityBy(3);
     } else {
       item.quality = 0;
     }
-
-    item.quality = Math.min(50, item.quality);
   }
 }

@@ -6,14 +6,13 @@ var GildedRose = require('../src/gildedRose.js'),
 
 describe("GildedRose inventory at the end of each day", function() {
   it("the quality of a product decreases by 1", function() {
-    var anyInitialQuality = 10,
-      notNeededDaysToSell = null,
-      item = new Item("A regular item", notNeededDaysToSell, anyInitialQuality),
+    var daysToBeSold = 5, quality = 10,
+      item = new Item("A regular item", daysToBeSold, quality),
       inventory = Inventory([item]);
 
     inventory.update();
 
-    expect(item.quality).toBe(anyInitialQuality - 1);
+    expect(item.quality).toBe(quality - 1);
   });
 
   it("the days to be sold of a product decrease by 1", function() {
@@ -35,5 +34,15 @@ describe("GildedRose inventory at the end of each day", function() {
     inventory.update();   
 
     expect(item.quality).toBe(0);
+  });
+
+  it("once the sell by date has passed, Quality degrades twice as fast", function() {
+    var daysToBeSold = 0, quality = 4,
+      item = new Item("A regular item", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality - 2);
   });
 });

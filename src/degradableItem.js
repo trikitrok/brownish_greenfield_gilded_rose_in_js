@@ -51,6 +51,6 @@ function AgedBrie(item) {
   }
 
   function updateQuality() {
-    item.quality += 1;
+    item.quality = Math.min(50, item.quality + 1)
   }
 }

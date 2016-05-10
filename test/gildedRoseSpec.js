@@ -54,4 +54,14 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.quality).toBe(quality + 1);
   });
+
+  it("'Aged Brie' Quality is never more than 50", function() {
+    var daysToBeSold = 2, quality = 50,
+      item = new Item("Aged Brie", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality);
+  })
 });

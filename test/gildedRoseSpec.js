@@ -85,4 +85,14 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.quality).toBe(quality + 1);
   });
+
+  it("'Backstage passes' quality increases by 2, when there are between 10 and 5 days to the concert", function() {
+    var daysToBeSold = 7, quality = 5,
+      item = new Item("Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality + 2);
+  });
 });

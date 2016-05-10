@@ -78,6 +78,10 @@ function BackstagePasses(item) {
   }
 
   function updateQuality() {
-    item.quality = item.quality + 1;
+    if(item.sell_in > 10) {
+      item.quality = item.quality + 1;
+    } else {
+      item.quality = item.quality + 2;
+    }
   }
 }

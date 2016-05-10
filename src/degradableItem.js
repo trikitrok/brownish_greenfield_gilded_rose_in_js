@@ -7,6 +7,8 @@ function create(item) {
     return AgedBrie(item);
   } else if(item.name === "Sulfuras") {
     return Sulfuras();
+  } else if(item.name === "Backstage passes") {
+    return BackstagePasses(item);
   }
   return RegularItem(item);
 }
@@ -53,7 +55,7 @@ function AgedBrie(item) {
   }
 
   function updateQuality() {
-    item.quality = Math.min(50, item.quality + 1)
+    item.quality = Math.min(50, item.quality + 1);
   }
 }
 
@@ -61,4 +63,23 @@ function Sulfuras() {
   return {
     update: function() {}
   };
+}
+
+function BackstagePasses(item) {
+  return {
+    update: update
+  };
+
+  function update() {
+    age();
+    updateQuality();
+  }
+
+  function age() {
+     item.sell_in -= 1;
+  }
+
+  function updateQuality() {
+    item.quality = item.quality + 1;
+  }
 }

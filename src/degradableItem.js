@@ -30,17 +30,19 @@ function create(item) {
 }
 
 function DegradableItem(item) {
+  var MAX_QUALITY = 50;
   return {
     age: function() {
        item.sell_in -= 1;
     },
     increaseQualityBy: function(amount) {
-      item.quality = Math.min(50, item.quality + amount);
+      item.quality = Math.min(MAX_QUALITY, item.quality + amount);
     }
   };
 }
 
 function RegularItem(item) {
+  var MIN_QUALITY = 0;
   return {
     age: DegradableItem(item).age,
     updateQuality: function() {
@@ -53,7 +55,7 @@ function RegularItem(item) {
   };
 
   function decreaseQualityBy(value) {
-    item.quality = Math.max(0, item.quality - value)
+    item.quality = Math.max(MIN_QUALITY, item.quality - value)
   }
 }
 

@@ -115,4 +115,14 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.quality).toBe(0);
   });
+
+  it("'Backstage passes' quality is never more than 50", function() {
+    var daysToBeSold = 10, quality = 50,
+      item = new Item("Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality);
+  });
 });

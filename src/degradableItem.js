@@ -87,5 +87,7 @@ function BackstagePasses(item) {
     } else {
       item.quality = 0;
     }
+
+    item.quality = Math.min(50, item.quality);
   }
 }

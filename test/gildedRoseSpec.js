@@ -44,4 +44,14 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.quality).toBe(quality - 2);
   });
+
+  it("'Aged Brie' increases in Quality by one the older it gets", function() {
+    var daysToBeSold = 7, quality = 4,
+      item = new Item("Aged Brie", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality + 1);
+  });
 });

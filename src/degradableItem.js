@@ -3,8 +3,10 @@ module.exports = {
 };
 
 function create(item) {
-  if(item.name == "Aged Brie") {
+  if(item.name === "Aged Brie") {
     return AgedBrie(item);
+  } else if(item.name === "Sulfuras") {
+    return Sulfuras();
   }
   return RegularItem(item);
 }
@@ -53,4 +55,10 @@ function AgedBrie(item) {
   function updateQuality() {
     item.quality = Math.min(50, item.quality + 1)
   }
+}
+
+function Sulfuras() {
+  return {
+    update: function() {}
+  };
 }

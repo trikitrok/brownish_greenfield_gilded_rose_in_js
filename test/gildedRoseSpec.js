@@ -64,4 +64,15 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.quality).toBe(quality);
   })
+
+  it("'Sulfuras' never has to be sold or decreases in Quality", function() {
+    var daysToBeSold = "anything", quality = 80,
+      item = new Item("Sulfuras", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality);
+    expect(item.sell_in).toBe(daysToBeSold);
+  })
 });

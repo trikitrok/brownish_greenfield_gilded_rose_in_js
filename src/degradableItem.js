@@ -28,7 +28,7 @@ function create(item) {
   }
 
   function notConjuredItemNameFor(item) {
-    return item.name.replace("Conjured", "").replace("conjured", "").replace(/  +/g, ' ');
+    return item.name.replace("Conjured", "").replace("conjured", "").replace(/  +/g, ' ').trim();
   }
 }
 

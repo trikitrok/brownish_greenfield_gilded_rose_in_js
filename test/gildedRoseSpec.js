@@ -146,5 +146,104 @@ describe("GildedRose inventory at the end of each day", function() {
     expect(item.sell_in).toBe(daysToBeSold - 1);
   });
 
-  
+  it("the Quality of a conjured item is never negative", function() {
+    var daysToBeSold = 8, quality = 0,
+      item = new Item("A conjured regular item", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();   
+
+    expect(item.quality).toBe(0);
+  });
+
+  it("once the sell by date has passed, Quality of conjured items also degrades twice as fast", function() {
+    var daysToBeSold = 0, quality = 4,
+      item = new Item("A conjured regular item", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality - 4);
+  });
+
+  it("'Conjured Aged Brie' increases in Quality by 2 the older it gets", function() {
+    var daysToBeSold = 7, quality = 4,
+      item = new Item("Conjured Aged Brie", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality + 2);
+  });
+
+  it("'Conjured Aged Brie' Quality is never more than 50", function() {
+    var daysToBeSold = 2, quality = 50,
+      item = new Item("Conjured Aged Brie", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality);
+  })
+
+  it("'Conjured Sulfuras' never has to be sold or decreases in Quality", function() {
+    var daysToBeSold = "anything", quality = 80,
+      item = new Item("Conjured Sulfuras", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality);
+    expect(item.sell_in).toBe(daysToBeSold);
+  })
+
+  it("'Conjured Backstage passes' quality increases by 2, when there are more than 10 days to the concert", function() {
+    var daysToBeSold = 12, quality = 5,
+      item = new Item("Conjured Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality + 2);
+  });
+
+  it("'Conjured Backstage passes' quality increases by 4, between 10 and 5 days before to the concert", function() {
+    var daysToBeSold = 7, quality = 5,
+      item = new Item("Conjured Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality + 4);
+  });
+
+  it("'Conjured Backstage passes' quality increases by 6, 5 days or less before the concert", function() {
+    var daysToBeSold = 1, quality = 5,
+      item = new Item("Conjured Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality + 6);
+  });
+
+  it("'Conjured Backstage passes' quality drops to 0 after the concert", function() {
+    var daysToBeSold = 0, quality = 5,
+      item = new Item("Conjured Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(0);
+  });
+
+  it("'Conjured Backstage passes' quality is never more than 50", function() {
+    var daysToBeSold = 10, quality = 50,
+      item = new Item("Conjured Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(quality);
+  });
 });

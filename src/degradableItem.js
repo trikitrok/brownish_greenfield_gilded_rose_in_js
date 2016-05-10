@@ -12,14 +12,14 @@ function create(item) {
   return createItemAccordingToName(item.name, item);
   
   function createItemAccordingToName(name, item) {
-    if(name === "Aged Brie") {
-      return AgedBrie(item);
-    } else if(name === "Sulfuras") {
-      return Sulfuras();
-    } else if(name === "Backstage passes") {
-      return BackstagePasses(item);
-    }
-    return RegularItem(item);
+    var itemFactoriesByName = {
+      "Aged Brie": AgedBrie,
+      "Sulfuras": Sulfuras,
+      "Backstage passes": BackstagePasses
+    },
+    factoryFn = itemFactoriesByName[name] || RegularItem;
+
+    return factoryFn(item);
   }
 
   function isConjured(item) {

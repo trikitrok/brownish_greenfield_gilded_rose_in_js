@@ -26,4 +26,14 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.sell_in).toBe(anyInitialdaysToBeSold - 1);
   });
+
+  it("the Quality of an item is never negative", function() {
+    var notNeededDaysToSell = null,
+      item = new Item("A regular item", notNeededDaysToSell, 0),
+      inventory = Inventory([item]);
+
+    inventory.update();   
+
+    expect(item.quality).toBe(0);
+  });
 });

@@ -13,6 +13,7 @@ function Inventory(items) {
   function update() {
     items.forEach(
       function(item) {
+        item.sell_in -= 1;
         item.quality -= 1;
       }
     );

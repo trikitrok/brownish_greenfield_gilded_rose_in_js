@@ -4,21 +4,18 @@ module.exports = {
 
 function create(item) {
   if(isConjured(item)) {
-    return Conjured(
-      createItemAccordingToName(notConjuredItemNameFor(item), item)
-    );
+    return Conjured(createDegradableItem(item));
   } 
-    
-  return createItemAccordingToName(item.name, item);
+  return createDegradableItem(item);
   
-  function createItemAccordingToName(name, item) {
-    var itemFactoriesByName = {
-      "Aged Brie": AgedBrie,
-      "Sulfuras": Sulfuras,
-      "Backstage passes": BackstagePasses
-    },
-    factoryFn = itemFactoriesByName[name] || RegularItem;
-
+  function createDegradableItem(item) {
+    var name = notConjuredItemNameFor(item),
+      itemFactoriesByName = {
+        "Aged Brie": AgedBrie,
+        "Sulfuras": Sulfuras,
+        "Backstage passes": BackstagePasses
+      },
+      factoryFn = itemFactoriesByName[name] || RegularItem;
     return factoryFn(item);
   }
 

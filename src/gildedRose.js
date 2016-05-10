@@ -1,13 +1,27 @@
 'use strict';
 
-module.exports.GildedRose = GildedRose;
-
-function GildedRose() {
-  
+module.exports = {
+  Inventory: Inventory,
+  Item: Item
 };
+
+function Inventory(items) {
+  return {
+    update: update
+  };
+
+  function update() {
+    items.forEach(
+      function(item) {
+        item.quality -= 1;
+      }
+    );
+  }
+}
 
 function Item(name, sell_in, quality) {
   this.name = name;
   this.sell_in = sell_in;
   this.quality = quality;
 }
+

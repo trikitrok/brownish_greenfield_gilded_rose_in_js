@@ -105,4 +105,14 @@ describe("GildedRose inventory at the end of each day", function() {
 
     expect(item.quality).toBe(quality + 3);
   });
+
+  it("'Backstage passes' quality drops to 0 after the concert", function() {
+    var daysToBeSold = 0, quality = 5,
+      item = new Item("Backstage passes", daysToBeSold, quality),
+      inventory = Inventory([item]);
+
+    inventory.update();
+
+    expect(item.quality).toBe(0);
+  });
 });

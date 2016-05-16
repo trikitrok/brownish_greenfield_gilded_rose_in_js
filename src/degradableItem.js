@@ -21,10 +21,14 @@ function create(item) {
 
   function isConjured(item) {
     var name = copyString(item.name);
-    return name.toLowerCase().indexOf("conjured") != -1;
+    return stringContains(name.toLowerCase(), "conjured");
 
     function copyString(str) {
       return str.slice(0);
+    }
+
+    function stringContains(str, containedStr) {
+      return str.indexOf(containedStr) != -1;
     }
   }
 

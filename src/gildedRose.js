@@ -3,13 +3,15 @@
 var DegradableItems = require('./degradableItems.js');
 
 module.exports = {
-  Inventory: Inventory,
+  withCatalog: function(items) {
+    return GildedRose(items);
+  },
   Item: Item
 };
 
-function Inventory(items) {
+function GildedRose(items) {
   return {
-    update: function () {
+    updateInventory: function () {
       var degradableItems = DegradableItems.createFrom(items);
       degradableItems.update();
     }

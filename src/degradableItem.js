@@ -20,8 +20,12 @@ function create(item) {
   }
 
   function isConjured(item) {
-    var name = item.name.slice(0);
+    var name = copyString(item.name);
     return name.toLowerCase().indexOf("conjured") != -1;
+
+    function copyString(str) {
+      return str.slice(0);
+    }
   }
 
   function notConjuredItemNameFor(item) {

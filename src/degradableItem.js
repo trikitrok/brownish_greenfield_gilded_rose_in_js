@@ -42,9 +42,10 @@ function DegradableItem(item) {
 }
 
 function RegularItem(item) {
-  var MIN_QUALITY = 0;
+  var degradableItem = DegradableItem(item),
+    MIN_QUALITY = 0;
   return {
-    age: DegradableItem(item).age,
+    age: degradableItem.age,
     updateQuality: function() {
       if(item.sell_in >= 0) {
         decreaseQualityBy(1);  
@@ -60,10 +61,12 @@ function RegularItem(item) {
 }
 
 function AgedBrie(item) {
+  var degradableItem = DegradableItem(item);
+
   return {
-    age: DegradableItem(item).age,
+    age: degradableItem.age,
     updateQuality: function () {
-      DegradableItem(item).increaseQualityBy(1);
+      degradableItem.increaseQualityBy(1);
     }
   };
 }

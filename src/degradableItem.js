@@ -25,7 +25,8 @@ function create(item) {
   }
 
   function notConjuredItemNameFor(item) {
-    var name =["Conjured", "conjured"].reduce(
+    var conjuredRepresentations = ["Conjured", "conjured"],
+      name = conjuredRepresentations.reduce(
       function(acc, representation) {
         acc = acc.replace(representation, "")
         return acc;

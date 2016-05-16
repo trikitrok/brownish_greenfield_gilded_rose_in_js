@@ -31,6 +31,7 @@ function create(item) {
 
 function DegradableItem(item) {
   var MAX_QUALITY = 50;
+
   return {
     age: function() {
        item.sell_in -= 1;
@@ -44,6 +45,7 @@ function DegradableItem(item) {
 function RegularItem(item) {
   var degradableItem = DegradableItem(item),
     MIN_QUALITY = 0;
+
   return {
     age: degradableItem.age,
     updateQuality: function() {
@@ -83,7 +85,7 @@ function BackstagePasses(item) {
 
   return {
     age: degradableItem.age,
-    updateQuality: function updateQuality() {    
+    updateQuality: function() {    
       if(isConcertInMoreThanTenDays()) {
         degradableItem.increaseQualityBy(1);
       } else if (isConcertInTenToFiveDays()) {

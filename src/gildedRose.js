@@ -11,7 +11,7 @@ module.exports = {
 
 function GildedRose(items) {
   return {
-    updateInventory: function () {
+    updateInventory: function() {
       var degradableItems = DegradableItems.createFrom(items);
       degradableItems.update();
     }
@@ -23,4 +23,3 @@ function Item(name, sell_in, quality) {
   this.sell_in = sell_in;
   this.quality = quality;
 }
-
